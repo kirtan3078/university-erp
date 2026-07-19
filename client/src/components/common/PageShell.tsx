@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import BackButton from "./BackButton";
 
 type PageShellProps = {
   eyebrow: string;
@@ -17,6 +18,10 @@ export default function PageShell({ eyebrow, title, subtitle, children }: PageSh
       </div>
 
       <div className="relative mx-auto flex min-h-screen max-w-7xl flex-col px-4 py-24 sm:px-6 lg:px-8">
+        <div className="mb-6">
+          <BackButton />
+        </div>
+
         <div className="max-w-3xl">
           <span className="inline-flex items-center rounded-full border border-sky-400/25 bg-sky-400/10 px-4 py-2 text-sm text-sky-200 backdrop-blur-sm">
             <span className="mr-2 h-2.5 w-2.5 rounded-full bg-emerald-400" />

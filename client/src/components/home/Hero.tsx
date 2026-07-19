@@ -1,8 +1,10 @@
 import { useEffect, useMemo, useRef, useState, type MouseEvent } from "react";
+import { useNavigate } from "react-router-dom";
 
 type HeroButtonProps = {
   children: React.ReactNode;
   variant?: "primary" | "secondary";
+  onClick?: () => void;
 };
 
 type DashboardCardProps = {
@@ -31,7 +33,7 @@ type LinePoint = {
   opacity: number;
 };
 
-function HeroButton({ children, variant = "primary" }: HeroButtonProps) {
+function HeroButton({ children, variant = "primary", onClick }: HeroButtonProps) {
   const baseClass =
     "group inline-flex items-center justify-center rounded-2xl px-6 py-3 text-sm font-semibold transition-all duration-300 hover:-translate-y-1 hover:shadow-lg";
 
@@ -39,6 +41,7 @@ function HeroButton({ children, variant = "primary" }: HeroButtonProps) {
     return (
       <button
         type="button"
+        onClick={onClick}
         className={`${baseClass} border border-white/15 bg-white/5 text-slate-200 hover:border-cyan-400/50 hover:bg-white/10`}
       >
         <span className="transition-transform duration-300 group-hover:translate-x-0.5">{children}</span>
@@ -49,6 +52,7 @@ function HeroButton({ children, variant = "primary" }: HeroButtonProps) {
   return (
     <button
       type="button"
+      onClick={onClick}
       className={`${baseClass} bg-gradient-to-r from-sky-500 via-cyan-400 to-fuchsia-500 text-slate-950 shadow-[0_10px_40px_rgba(34,211,238,0.25)] hover:shadow-[0_12px_50px_rgba(34,211,238,0.35)]`}
     >
       <span className="transition-transform duration-300 group-hover:translate-x-0.5">{children}</span>
@@ -87,6 +91,7 @@ function createBubble(index: number): BubblePoint {
 }
 
 export default function Hero() {
+  const navigate = useNavigate();
   const [pointer, setPointer] = useState({ x: 0.5, y: 0.5 });
   const [bubbles, setBubbles] = useState<BubblePoint[]>([]);
   const bubbleRef = useRef<BubblePoint[]>([]);
@@ -278,8 +283,8 @@ export default function Hero() {
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-start">
-            <HeroButton variant="primary">Get Started</HeroButton>
-            <HeroButton variant="secondary">Explore</HeroButton>
+            <HeroButton variant="primary" onClick={() => navigate("/register")}>Get Started</HeroButton>
+            <HeroButton variant="secondary" onClick={() => navigate("/login")}>Login</HeroButton>
           </div>
 
           <div className="mt-8 flex flex-wrap items-center gap-4 text-sm text-slate-400">

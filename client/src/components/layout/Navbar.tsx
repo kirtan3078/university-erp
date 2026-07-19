@@ -1,14 +1,15 @@
 import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 const navItems = [
   { label: "Home", to: "/" },
-  { label: "Student Login", to: "/student-login" },
+  { label: "Student Login", to: "/login/student" },
   { label: "Admissions", to: "/admissions" },
   { label: "Examination", to: "/examination" },
 ];
 
 export default function Navbar() {
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -54,8 +55,17 @@ export default function Navbar() {
               ))}
             </nav>
 
-            <div className="hidden md:block">
-              <button className="rounded-full bg-gradient-to-r from-sky-500 via-cyan-400 to-fuchsia-500 px-5 py-2 text-sm font-semibold text-slate-950 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-cyan-500/20">
+            <div className="hidden md:flex md:items-center md:gap-3">
+              <button
+                onClick={() => navigate("/register")}
+                className="rounded-full border border-white/15 bg-white/5 px-5 py-2 text-sm font-semibold text-slate-200 transition-all duration-300 hover:border-cyan-400/40 hover:bg-white/10"
+              >
+                Register
+              </button>
+              <button
+                onClick={() => navigate("/login/student")}
+                className="rounded-full bg-gradient-to-r from-sky-500 via-cyan-400 to-fuchsia-500 px-5 py-2 text-sm font-semibold text-slate-950 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-cyan-500/20"
+              >
                 Login
               </button>
             </div>
@@ -93,9 +103,20 @@ export default function Navbar() {
                 ))}
               </nav>
 
-              <button className="mt-3 w-full rounded-xl bg-gradient-to-r from-sky-500 via-cyan-400 to-fuchsia-500 px-4 py-2 text-sm font-semibold text-slate-950 transition-all duration-300">
-                Login
-              </button>
+              <div className="mt-3 flex flex-col gap-2">
+                <button
+                  onClick={() => navigate("/register")}
+                  className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-slate-200 transition-all duration-300"
+                >
+                  Register
+                </button>
+                <button
+                  onClick={() => navigate("/login/student")}
+                  className="w-full rounded-xl bg-gradient-to-r from-sky-500 via-cyan-400 to-fuchsia-500 px-4 py-2 text-sm font-semibold text-slate-950 transition-all duration-300"
+                >
+                  Login
+                </button>
+              </div>
             </div>
           </div>
         </div>
