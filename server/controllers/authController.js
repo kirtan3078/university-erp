@@ -30,6 +30,13 @@ const sendAuthResponse = (res, user, statusCode = 200) => {
       id: user._id,
       fullName: user.fullName,
       email: user.email,
+      enrollmentNumber: user.enrollmentNumber,
+      employeeId: user.employeeId,
+      mobileNumber: user.mobileNumber,
+      department: user.department,
+      course: user.course,
+      semester: user.semester,
+      profileImage: user.profileImage,
       role: user.role,
       isActivated: user.isActivated,
     },
@@ -182,6 +189,11 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 });
 
 exports.studentRegister = catchAsync(async (req, res, next) => {
+
+  console.log("===== REGISTER REQUEST =====");
+  console.log(req.body);
+  console.log("============================");
+
   const {
     fullName,
     enrollmentNumber,
@@ -285,5 +297,18 @@ exports.createTestStudent = catchAsync(async (req, res, next) => {
       role: user.role,
       isActivated: user.isActivated,
     },
+  });
+});
+
+exports.getStudentProfile = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.user._id).select("-password");
+
+  if (!user) {
+    return next(new AppError("Student not found", 404));
+  }
+
+  res.status(200).json({
+    success: true,
+    user,
   });
 });

@@ -4,7 +4,7 @@ const helmet = require("helmet");
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
 const authRoutes = require("./routes/authRoutes");
-
+const adminRoutes = require("./routes/adminRoutes");
 const errorHandler = require("./middleware/errorHandler");
 
 const app = express();
@@ -25,7 +25,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use("/api/auth", authRoutes);
-
+app.use("/api/admin", adminRoutes);
 // Test Route
 app.get("/", (req, res) => {
   res.json({

@@ -7,6 +7,7 @@ const userSchema = new mongoose.Schema(
       required: [true, "fullName is required"],
       trim: true,
     },
+
     email: {
       type: String,
       required: [true, "email is required"],
@@ -14,25 +15,58 @@ const userSchema = new mongoose.Schema(
       trim: true,
       lowercase: true,
     },
+
     enrollmentNumber: {
       type: String,
       trim: true,
       default: "",
     },
+
     employeeId: {
       type: String,
       trim: true,
       default: "",
     },
+
+    mobileNumber: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+
+    department: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+
+    course: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+
+    semester: {
+      type: Number,
+      default: 1,
+    },
+
+    profileImage: {
+      type: String,
+      default: "",
+    },
+
     password: {
       type: String,
       required: [true, "password is required"],
     },
+
     role: {
       type: String,
       enum: ["student", "faculty", "admin"],
       default: "student",
     },
+
     isActivated: {
       type: Boolean,
       default: false,

@@ -10,7 +10,7 @@ type RegisterFormValues = {
   mobileNumber: string;
   department: string;
   course: string;
-  semester: string;
+  semester: number;
   password: string;
   confirmPassword: string;
   agreeToTerms: boolean;
@@ -18,7 +18,16 @@ type RegisterFormValues = {
 
 const departments = ["Computer Science", "Mechanical", "Electrical", "Civil", "Business Administration"];
 const courses = ["B.Tech", "M.Tech", "MBA", "BBA", "B.Sc"];
-const semesters = ["1st Semester", "2nd Semester", "3rd Semester", "4th Semester", "5th Semester", "6th Semester", "7th Semester", "8th Semester"];
+const semesters = [
+  { label: "1st Semester", value: 1 },
+  { label: "2nd Semester", value: 2 },
+  { label: "3rd Semester", value: 3 },
+  { label: "4th Semester", value: 4 },
+  { label: "5th Semester", value: 5 },
+  { label: "6th Semester", value: 6 },
+  { label: "7th Semester", value: 7 },
+  { label: "8th Semester", value: 8 },
+];
 
 export default function StudentRegister() {
   const navigate = useNavigate();
@@ -38,7 +47,7 @@ export default function StudentRegister() {
       mobileNumber: "",
       department: "",
       course: "",
-      semester: "",
+      semester: 1,
       password: "",
       confirmPassword: "",
       agreeToTerms: false,
@@ -210,14 +219,17 @@ export default function StudentRegister() {
                 <select
                   id="semester"
                   className="w-full rounded-2xl border border-white/10 bg-slate-800/70 px-4 py-3 text-sm text-white outline-none transition focus:border-cyan-400/50 focus:ring-2 focus:ring-cyan-500/20"
-                  {...register("semester", { required: "Semester is required" })}
+                  {...register("semester", {
+  required: "Semester is required",
+  valueAsNumber: true,
+})}
                 >
                   <option value="">Select semester</option>
                   {semesters.map((semester) => (
-                    <option key={semester} value={semester}>
-                      {semester}
-                    </option>
-                  ))}
+                  <option key={semester.value} value={semester.value}>
+                    {semester.label}
+                      </option>
+                    ))}
                 </select>
                 {errors.semester ? <p className="mt-2 text-sm text-rose-300">{errors.semester.message}</p> : null}
               </div>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "@/context/AuthContext";
 import api from "@/services/api";
 
 type LoginFormValues = {
@@ -12,6 +13,7 @@ type LoginFormValues = {
 export default function StudentLogin() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { login } = useAuth();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const successMessage = (location.state as { successMessage?: string } | null)?.successMessage || "";
@@ -43,7 +45,10 @@ export default function StudentLogin() {
       const { token, user } = response.data;
       if (token) {
         localStorage.setItem("authToken", token);
-        localStorage.setItem("authUser", JSON.stringify(user));
+      }
+
+      if (user) {
+        login(user);
       }
 
       navigate("/student/dashboard");
