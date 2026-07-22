@@ -1,18 +1,24 @@
-import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
-export default function ProtectedRoute() {
-  const { isAuthenticated } = useAuth();
-  const location = useLocation();
+type ProtectedRouteProps = {
+  allowedRoles?: ("student" | "faculty" | "admin")[];
+};
+
+export default function ProtectedRoute({
+  allowedRoles,
+}: ProtectedRouteProps) {
+  const { user, isAuthenticated } = useAuth();
 
   if (!isAuthenticated) {
-    return (
-      <Navigate
-        to="/login/student"
-        replace
-        state={{ from: location }}
-      />
-    );
+    return <Navigate to="/login" replace />;
+  }
+
+  if (
+    allowedRoles &&
+    (!user || !allowedRoles.includes(user.role as "student" | "faculty" | "admin"))
+  ) {
+    return <Navigate to="/" replace />;
   }
 
   return <Outlet />;

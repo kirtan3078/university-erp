@@ -7,7 +7,13 @@ import LoginSelection from "../pages/public/LoginSelection";
 import Admissions from "../pages/public/Admissions";
 import AuthPlaceholder from "../pages/public/AuthPlaceholder";
 
+import AdminLogin from "../pages/admin/AdminLogin";
+import AdminDashboard from "../pages/admin/AdminDashboard";
+import Students from "../pages/admin/Students";
+import CreateStudent from "../pages/admin/CreateStudent";
+
 import DashboardLayout from "../layouts/DashboardLayout";
+import AdminLayout from "../layouts/AdminLayout";
 
 import Dashboard from "../pages/student/Dashboard";
 import Attendance from "../pages/student/Attendance";
@@ -23,7 +29,10 @@ export default function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* ========================= */}
         {/* Public Routes */}
+        {/* ========================= */}
+
         <Route path="/" element={<Home />} />
 
         <Route
@@ -70,6 +79,7 @@ export default function AppRoutes() {
 
         <Route path="/login" element={<LoginSelection />} />
         <Route path="/login/student" element={<StudentLogin />} />
+        <Route path="/login/admin" element={<AdminLogin />} />
 
         <Route
           path="/login/faculty"
@@ -77,16 +87,6 @@ export default function AppRoutes() {
             <AuthPlaceholder
               title="Faculty Login"
               subtitle="Faculty access for attendance, marks and timetable workflows."
-            />
-          }
-        />
-
-        <Route
-          path="/login/admin"
-          element={
-            <AuthPlaceholder
-              title="Admin Login"
-              subtitle="Administrative access for ERP oversight and governance."
             />
           }
         />
@@ -104,13 +104,19 @@ export default function AppRoutes() {
         <Route path="/register" element={<StudentRegister />} />
         <Route path="/register/student" element={<StudentRegister />} />
 
-        {/* Protected Student Routes */}
-        <Route element={<ProtectedRoute />}>
+        {/* ========================= */}
+        {/* Student Routes */}
+        {/* ========================= */}
+
+        <Route element={<ProtectedRoute allowedRoles={["student"]} />}>
           <Route path="/student/dashboard" element={<DashboardLayout />}>
             <Route index element={<Dashboard />} />
             <Route path="profile" element={<Profile />} />
             <Route path="attendance" element={<Attendance />} />
             <Route path="timetable" element={<Timetable />} />
+            <Route path="results" element={<Results />} />
+            <Route path="fees" element={<Fees />} />
+            <Route path="settings" element={<Settings />} />
 
             <Route
               path="courses"
@@ -141,9 +147,6 @@ export default function AppRoutes() {
                 />
               }
             />
-
-            <Route path="results" element={<Results />} />
-            <Route path="fees" element={<Fees />} />
 
             <Route
               path="hall-ticket"
@@ -184,12 +187,25 @@ export default function AppRoutes() {
                 />
               }
             />
-
-            <Route path="settings" element={<Settings />} />
           </Route>
         </Route>
 
-        {/* Faculty */}
+        {/* ========================= */}
+        {/* Admin Routes */}
+        {/* ========================= */}
+
+        <Route element={<ProtectedRoute allowedRoles={["admin"]} />}>
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route path="dashboard" element={<AdminDashboard />} />
+            <Route path="students" element={<Students />} />
+            <Route path="students/create" element={<CreateStudent />} />
+          </Route>
+        </Route>
+
+        {/* ========================= */}
+        {/* Faculty Routes */}
+        {/* ========================= */}
+
         <Route
           path="/faculty/dashboard"
           element={
@@ -200,13 +216,16 @@ export default function AppRoutes() {
           }
         />
 
-        {/* Admin */}
+        {/* ========================= */}
+        {/* 404 */}
+        {/* ========================= */}
+
         <Route
-          path="/admin/dashboard"
+          path="*"
           element={
             <AuthPlaceholder
-              title="Admin Dashboard"
-              subtitle="University-wide administration and ERP control center."
+              title="404"
+              subtitle="Page not found."
             />
           }
         />
