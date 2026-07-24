@@ -11,6 +11,7 @@ import AdminLogin from "../pages/admin/AdminLogin";
 import AdminDashboard from "../pages/admin/AdminDashboard";
 import Students from "../pages/admin/Students";
 import CreateStudent from "../pages/admin/CreateStudent";
+import EditStudent from "../pages/admin/EditStudent";
 
 import DashboardLayout from "../layouts/DashboardLayout";
 import AdminLayout from "../layouts/AdminLayout";
@@ -193,14 +194,19 @@ export default function AppRoutes() {
         {/* ========================= */}
         {/* Admin Routes */}
         {/* ========================= */}
+<Route element={<ProtectedRoute allowedRoles={["admin"]} />}>
+  <Route path="/admin" element={<AdminLayout />}>
+    <Route path="dashboard" element={<AdminDashboard />} />
+    <Route path="students" element={<Students />} />
+    <Route path="students/create" element={<CreateStudent />} />
 
-        <Route element={<ProtectedRoute allowedRoles={["admin"]} />}>
-          <Route path="/admin" element={<AdminLayout />}>
-            <Route path="dashboard" element={<AdminDashboard />} />
-            <Route path="students" element={<Students />} />
-            <Route path="students/create" element={<CreateStudent />} />
-          </Route>
-        </Route>
+    {/* Add this */}
+    <Route
+      path="students/edit/:id"
+      element={<EditStudent />}
+    />
+  </Route>
+</Route>
 
         {/* ========================= */}
         {/* Faculty Routes */}

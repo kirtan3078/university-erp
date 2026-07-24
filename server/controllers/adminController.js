@@ -1,5 +1,4 @@
 const User = require("../models/User");
-
 // =====================================
 // Get All Students
 // =====================================
@@ -50,23 +49,15 @@ exports.getStudentById = async (req, res) => {
     });
   }
 };
-
 // =====================================
 // Update Student
 // =====================================
 exports.updateStudent = async (req, res) => {
   try {
-    const student = await User.findOneAndUpdate(
-      {
-        _id: req.params.id,
-        role: "student",
-      },
-      req.body,
-      {
-        new: true,
-        runValidators: true,
-      }
-    ).select("-password");
+    const student = await User.findOne({
+      _id: req.params.id,
+      role: "student",
+    });
 
     if (!student) {
       return res.status(404).json({
@@ -75,10 +66,39 @@ exports.updateStudent = async (req, res) => {
       });
     }
 
+    const {
+      fullName,
+      email,
+      enrollmentNumber,
+      mobileNumber,
+      department,
+      course,
+      semester,
+      password,
+    } = req.body;
+
+    student.fullName = fullName;
+    student.email = email;
+    student.enrollmentNumber = enrollmentNumber;
+    student.mobileNumber = mobileNumber;
+    student.department = department;
+    student.course = course;
+    student.semester = semester;
+
+    // Update password only if a new one is provided
+    if (password && password.trim() !== "") {
+      student.password = await bcrypt.hash(password, 10);
+    }
+
+    await student.save();
+
+    const studentData = student.toObject();
+    delete studentData.password;
+
     res.status(200).json({
       success: true,
       message: "Student updated successfully",
-      student,
+      student: studentData,
     });
   } catch (error) {
     res.status(500).json({
@@ -87,7 +107,6 @@ exports.updateStudent = async (req, res) => {
     });
   }
 };
-
 // =====================================
 // Delete Student
 // =====================================
