@@ -24,6 +24,13 @@ import Timetable from "../pages/student/Timetable";
 import Profile from "../pages/student/Profile";
 import Settings from "../pages/student/Settings";
 
+import Faculty from "../pages/admin/Faculty";
+import AddFaculty from "../pages/admin/AddFaculty";
+import EditFaculty from "../pages/admin/EditFaculty";
+
+import AdminAttendance from "../pages/admin/Attendance";
+import CreateAttendance from "../pages/admin/CreateAttendance";
+import EditAttendance from "../pages/admin/EditAttendance"; 
 import ProtectedRoute from "../components/auth/ProtectedRoute";
 
 export default function AppRoutes() {
@@ -33,6 +40,7 @@ export default function AppRoutes() {
         {/* ========================= */}
         {/* Public Routes */}
         {/* ========================= */}
+
 
         <Route path="/" element={<Home />} />
 
@@ -197,13 +205,47 @@ export default function AppRoutes() {
 <Route element={<ProtectedRoute allowedRoles={["admin"]} />}>
   <Route path="/admin" element={<AdminLayout />}>
     <Route path="dashboard" element={<AdminDashboard />} />
-    <Route path="students" element={<Students />} />
-    <Route path="students/create" element={<CreateStudent />} />
 
-    {/* Add this */}
+    {/* Students */}
+    <Route path="students" element={<Students />} />
+    <Route
+      path="students/create"
+      element={<CreateStudent />}
+    />
     <Route
       path="students/edit/:id"
       element={<EditStudent />}
+    />
+
+    {/* Faculty */}
+    <Route
+      path="faculties"
+      element={<Faculty />}
+    />
+
+    <Route
+      path="faculties/create"
+      element={<AddFaculty />}
+    />
+
+    <Route
+      path="faculties/edit/:id"
+      element={<EditFaculty />}
+    />
+    {/* Attendance */}
+    <Route
+      path="attendance"
+      element={<AdminAttendance />}
+    />
+
+    <Route
+      path="attendance/create"
+      element={<CreateAttendance />}
+    />
+
+    <Route
+      path="attendance/edit/:id"
+      element={<EditAttendance />}
     />
   </Route>
 </Route>

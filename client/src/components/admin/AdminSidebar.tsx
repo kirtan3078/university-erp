@@ -11,7 +11,7 @@ const menus = [
   },
   {
     title: "Faculty",
-    path: "/admin/faculty",
+    path: "/admin/faculties",
   },
   {
     title: "Attendance",
@@ -33,7 +33,17 @@ const menus = [
 
 export default function AdminSidebar() {
   return (
-    <aside className="w-72 bg-slate-900 border-r border-slate-800">
+    <aside
+  className="
+    w-full
+    md:w-72
+    md:min-h-screen
+    bg-slate-900
+    border-r
+    border-slate-800
+    flex-shrink-0
+  "
+>
       <div className="p-6">
         <h1 className="text-2xl font-bold text-cyan-400">
           University ERP
@@ -44,18 +54,37 @@ export default function AdminSidebar() {
         </p>
       </div>
 
-      <nav className="space-y-2 px-4">
+     <nav
+  className="
+    px-4
+    pb-4
+    flex
+    gap-2
+    overflow-x-auto
+    md:block
+    md:space-y-2
+  "
+>
         {menus.map((item) => (
           <NavLink
             key={item.title}
             to={item.path}
             className={({ isActive }) =>
-              `block rounded-lg px-4 py-3 transition ${
-                isActive
-                  ? "bg-cyan-500 text-black font-semibold"
-                  : "text-slate-300 hover:bg-slate-800"
-              }`
-            }
+  `
+    whitespace-nowrap
+    block
+    rounded-lg
+    px-4
+    py-3
+    transition
+
+    ${
+      isActive
+        ? "bg-cyan-500 text-black font-semibold"
+        : "text-slate-300 hover:bg-slate-800"
+    }
+  `
+}
           >
             {item.title}
           </NavLink>
