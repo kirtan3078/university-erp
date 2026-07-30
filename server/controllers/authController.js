@@ -15,12 +15,12 @@ const signToken = (user) => {
 const sendAuthResponse = (res, user, statusCode = 200) => {
   const token = signToken(user);
 
-  res.cookie("jwt", token, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
-    maxAge: 7 * 24 * 60 * 60 * 1000,
-  });
+ res.cookie("jwt", token, {
+  httpOnly: true,
+  secure: true,
+  sameSite: "none",
+  maxAge: 7 * 24 * 60 * 60 * 1000,
+});
 
   res.status(statusCode).json({
     success: true,
