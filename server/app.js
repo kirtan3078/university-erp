@@ -7,6 +7,10 @@ const authRoutes = require("./routes/authRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const dashboardRoutes = require("./routes/dashboardRoutes");
 const attendanceRoutes = require("./routes/attendanceRoutes");
+const resultRoutes = require("./routes/resultRoutes");
+const feeRoutes = require("./routes/feeRoutes");
+const feeTemplateRoutes = require("./routes/feeTemplateRoutes");
+const noticeRoutes = require("./routes/noticeRoutes");
 const errorHandler = require("./middleware/errorHandler");
 
 const app = express();
@@ -30,6 +34,10 @@ app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/admin/attendance", attendanceRoutes);
+app.use("/api/admin/results", resultRoutes);
+app.use("/api/admin/fees", feeRoutes);
+app.use("/api/admin/fee-templates", feeTemplateRoutes);
+app.use("/api/admin/notices", noticeRoutes);
 // Test Route
 app.get("/", (req, res) => {
   res.json({

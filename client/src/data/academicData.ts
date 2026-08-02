@@ -195,3 +195,7 @@ export const semesters = [
     label: "Semester 8",
   },
 ];
+
+export const courses: Course[] = departments.flatMap(
+  (department) => department.courses
+);

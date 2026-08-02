@@ -12,14 +12,14 @@ import AdminDashboard from "../pages/admin/AdminDashboard";
 import Students from "../pages/admin/Students";
 import CreateStudent from "../pages/admin/CreateStudent";
 import EditStudent from "../pages/admin/EditStudent";
-
+import ViewStudent from "../pages/admin/ViewStudent";
 import DashboardLayout from "../layouts/DashboardLayout";
 import AdminLayout from "../layouts/AdminLayout";
 
 import Dashboard from "../pages/student/Dashboard";
 import Attendance from "../pages/student/Attendance";
-import Results from "../pages/student/Results";
-import Fees from "../pages/student/Fees";
+import StudentResults from "../pages/student/Results";
+import StudentFees from "../pages/student/Fees";
 import Timetable from "../pages/student/Timetable";
 import Profile from "../pages/student/Profile";
 import Settings from "../pages/student/Settings";
@@ -27,10 +27,32 @@ import Settings from "../pages/student/Settings";
 import Faculty from "../pages/admin/Faculty";
 import AddFaculty from "../pages/admin/AddFaculty";
 import EditFaculty from "../pages/admin/EditFaculty";
+import ViewFaculty from "../pages/admin/ViewFaculty";
 
 import AdminAttendance from "../pages/admin/Attendance";
 import CreateAttendance from "../pages/admin/CreateAttendance";
 import EditAttendance from "../pages/admin/EditAttendance"; 
+
+import AdminResults from "../pages/admin/Results";
+import ViewResult from "../pages/admin/ViewResult";
+import CreateResult from "../pages/admin/CreateResult";
+import EditResult from "../pages/admin/EditResult";
+
+import AdminFees from "../pages/admin/Fees";
+import CreateFee from "../pages/admin/CreateFee";
+import EditFee from "../pages/admin/EditFee";
+import ViewFee from "../pages/admin/ViewFee";
+
+import FeeTemplates from "../pages/admin/FeeTemplates";
+import CreateFeeTemplate from "../pages/admin/CreateFeeTemplate";
+import ViewFeeTemplate from "../pages/admin/ViewFeeTemplate";
+import EditFeeTemplate from "../pages/admin/EditFeeTemplate";
+
+import Notices from "../pages/admin/Notices";
+import CreateNotice from "../pages/admin/CreateNotice";
+import EditNotice from "../pages/admin/EditNotice";
+import ViewNotice from "../pages/admin/ViewNotice";
+
 import ProtectedRoute from "../components/auth/ProtectedRoute";
 
 export default function AppRoutes() {
@@ -123,8 +145,8 @@ export default function AppRoutes() {
             <Route path="profile" element={<Profile />} />
             <Route path="attendance" element={<Attendance />} />
             <Route path="timetable" element={<Timetable />} />
-            <Route path="results" element={<Results />} />
-            <Route path="fees" element={<Fees />} />
+            <Route path="results" element={<StudentResults />} />
+            <Route path="fees" element={<StudentFees />} />
             <Route path="settings" element={<Settings />} />
 
             <Route
@@ -208,45 +230,73 @@ export default function AppRoutes() {
 
     {/* Students */}
     <Route path="students" element={<Students />} />
-    <Route
-      path="students/create"
-      element={<CreateStudent />}
-    />
-    <Route
-      path="students/edit/:id"
-      element={<EditStudent />}
-    />
+    <Route path="students/create" element={<CreateStudent />} />
+    <Route path="students/edit/:id" element={<EditStudent />} />
+    <Route path="students/view/:id" element={<ViewStudent />}/>
 
     {/* Faculty */}
-    <Route
-      path="faculties"
-      element={<Faculty />}
-    />
-
-    <Route
-      path="faculties/create"
-      element={<AddFaculty />}
-    />
-
-    <Route
-      path="faculties/edit/:id"
-      element={<EditFaculty />}
-    />
+    <Route path="faculties" element={<Faculty />} />
+    <Route path="faculties/create" element={<AddFaculty />} />
+    <Route path="faculties/edit/:id" element={<EditFaculty />} />
+    <Route path="faculties/view/:id" element={<ViewFaculty />} />
     {/* Attendance */}
-    <Route
-      path="attendance"
-      element={<AdminAttendance />}
-    />
+    <Route path="attendance" element={<AdminAttendance />} />
+    <Route path="attendance/create" element={<CreateAttendance />} />
+    <Route path="attendance/edit/:id" element={<EditAttendance />} />
 
-    <Route
-      path="attendance/create"
-      element={<CreateAttendance />}
-    />
+    {/* Results */}
+    <Route path="results" element={<AdminResults />} />
+    <Route path="results/create" element={<CreateResult />} />
+    <Route path="results/view/:id" element={<ViewResult />} />
+    <Route path="results/edit/:id" element={<EditResult />} />
 
-    <Route
-      path="attendance/edit/:id"
-      element={<EditAttendance />}
-    />
+    {/* Fees */}
+    <Route path="fees" element={<AdminFees />} />
+    <Route path="fees/create" element={<CreateFee />} />
+    <Route path="fees/edit/:id" element={<EditFee />} />
+    <Route path="fees/view/:id" element={<ViewFee />} />
+    {/* Fee Templates */}
+
+<Route
+  path="fee-templates"
+  element={<FeeTemplates />}
+/>
+
+<Route
+  path="fee-templates/create"
+  element={<CreateFeeTemplate />}
+/>
+
+<Route
+  path="fee-templates/view/:id"
+  element={<ViewFeeTemplate />}
+/>
+
+<Route
+  path="fee-templates/edit/:id"
+  element={<EditFeeTemplate />}
+/>
+{/* Notices */}
+
+<Route
+  path="notices"
+  element={<Notices />}
+/>
+
+<Route
+  path="notices/create"
+  element={<CreateNotice />}
+/>
+
+<Route
+  path="notices/edit/:id"
+  element={<EditNotice />}
+/>
+
+<Route
+  path="notices/view/:id"
+  element={<ViewNotice />}
+/>
   </Route>
 </Route>
 

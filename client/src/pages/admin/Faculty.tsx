@@ -9,6 +9,7 @@ import {
   Users,
   UserCheck,
   UserX,
+Eye
 } from "lucide-react";
 import toast from "react-hot-toast";
 
@@ -387,6 +388,13 @@ export default function Faculty() {
 
                     <td className="px-6 py-5">
                       <div className="flex justify-center gap-3">
+                        <button
+  onClick={() => navigate(`/admin/faculties/view/${faculty._id}`)}
+  className="rounded-lg bg-cyan-600 p-2 text-white transition hover:bg-cyan-500"
+  title="View Faculty"
+>
+  <Eye size={18} />
+</button>
                         <button
                           onClick={() =>
                             navigate(

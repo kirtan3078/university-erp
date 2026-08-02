@@ -22,6 +22,10 @@ const menus = [
     path: "/admin/results",
   },
   {
+  title: "Fee Templates",
+  path: "/admin/fee-templates",
+ },
+  {
     title: "Fees",
     path: "/admin/fees",
   },
