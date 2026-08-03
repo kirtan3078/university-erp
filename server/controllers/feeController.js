@@ -239,11 +239,15 @@ exports.updateFee = async (req, res, next) => {
       });
     }
 
-    const totalFee =
-      Number(tuitionFee || 0) +
-      Number(examFee || 0) +
-      Number(libraryFee || 0) +
-      Number(otherFee || 0);
+const totalFee =
+Number(tuitionFee || 0)+
+Number(examFee || 0)+
+Number(libraryFee || 0)+
+Number(developmentFee || 0)+
+Number(sportsFee || 0)+
+Number(hostelFee || 0)+
+Number(transportFee || 0)+
+Number(otherFee || 0);
 
     const paid = Number(paidAmount || 0);
 
@@ -272,7 +276,7 @@ fee.totalFee = totalFee;
 fee.paidAmount = paidAmount;
 fee.dueAmount = dueAmount;
 
-fee.paymentStatus = paymentStatus;
+fee.paymentStatus = status;
 fee.paymentMethod = paymentMethod;
 fee.transactionId = transactionId;
 fee.paymentDate = paymentDate;

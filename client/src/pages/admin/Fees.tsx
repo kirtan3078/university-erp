@@ -35,7 +35,7 @@ interface Fee {
 
   dueAmount: number;
 
-  status: string;
+  paymentStatus: string;
 }
 
 export default function Fees() {
@@ -123,13 +123,13 @@ export default function Fees() {
 
   const totalFees = fees.length;
 
-  const paidStudents = fees.filter(
-    (f) => f.status === "Paid"
-  ).length;
+ const paidStudents = fees.filter(
+    (f) => f.paymentStatus === "Paid"
+).length;
 
-  const pendingStudents = fees.filter(
-    (f) => f.status !== "Paid"
-  ).length;
+ const pendingStudents = fees.filter(
+    (f) => f.paymentStatus !== "Paid"
+).length;
 
   const totalCollection = fees.reduce(
     (sum, f) => sum + f.paidAmount,
@@ -460,13 +460,13 @@ export default function Fees() {
 
                     <td className="px-6 py-5 text-center">
 
-                      {fee.status === "Paid" ? (
+                      {fee.paymentStatus === "Paid" ? (
 
                         <span className="rounded-full bg-green-500/15 px-3 py-1 text-sm font-medium text-green-400">
                           Paid
                         </span>
 
-                      ) : fee.status === "Partially Paid" ? (
+                      ) : fee.paymentStatus === "Partially Paid" ? (
 
                         <span className="rounded-full bg-yellow-500/15 px-3 py-1 text-sm font-medium text-yellow-400">
                           Partial
