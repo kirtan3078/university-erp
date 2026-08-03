@@ -1,153 +1,107 @@
-import axios from "axios";
+import api from "./api";
 
-const API =
-  "/api/admin/notices";
+const API = "/api/admin/notices";
 
 // =======================================
 // Create Notice
 // =======================================
 
-export const createNotice =
-  async (data: any) => {
-    const response =
-      await axios.post(
-        API,
-        data,
-        {
-          withCredentials: true,
-        }
-      );
-
-    return response.data;
-  };
+export const createNotice = async (data: any) => {
+  const response = await api.post(API, data);
+  return response.data;
+};
 
 // =======================================
 // Get All Notices
 // =======================================
 
-export const getAllNotices =
-  async () => {
-    const response =
-      await axios.get(
-        API,
-        {
-          withCredentials: true,
-        }
-      );
-
-    return response.data;
-  };
+export const getAllNotices = async () => {
+  const response = await api.get(API);
+  return response.data;
+};
 
 // =======================================
 // Get Notice By ID
 // =======================================
 
-export const getNoticeById =
-  async (id: string) => {
-    const response =
-      await axios.get(
-        `${API}/${id}`,
-        {
-          withCredentials: true,
-        }
-      );
+export const getNoticeById = async (id: string) => {
+  const response = await api.get(`${API}/${id}`);
+  return response.data;
+};
 
-    return response.data;
-  };
-  // =======================================
+// =======================================
 // Update Notice
 // =======================================
 
-export const updateNotice =
-  async (
-    id: string,
-    data: any
-  ) => {
-    const response =
-      await axios.put(
-        `${API}/${id}`,
-        data,
-        {
-          withCredentials: true,
-        }
-      );
+export const updateNotice = async (
+  id: string,
+  data: any
+) => {
+  const response = await api.put(
+    `${API}/${id}`,
+    data
+  );
 
-    return response.data;
-  };
+  return response.data;
+};
 
 // =======================================
 // Delete Notice
 // =======================================
 
-export const deleteNotice =
-  async (id: string) => {
-    const response =
-      await axios.delete(
-        `${API}/${id}`,
-        {
-          withCredentials: true,
-        }
-      );
+export const deleteNotice = async (
+  id: string
+) => {
+  const response = await api.delete(
+    `${API}/${id}`
+  );
 
-    return response.data;
-  };
+  return response.data;
+};
 
 // =======================================
 // Pin / Unpin Notice
 // =======================================
 
-export const togglePinNotice =
-  async (id: string) => {
-    const response =
-      await axios.patch(
-        `${API}/${id}/pin`,
-        {},
-        {
-          withCredentials: true,
-        }
-      );
+export const togglePinNotice = async (
+  id: string
+) => {
+  const response = await api.patch(
+    `${API}/${id}/pin`
+  );
 
-    return response.data;
-  };
-  // =======================================
+  return response.data;
+};
+
+// =======================================
 // Change Notice Status
 // =======================================
 
-export const changeNoticeStatus =
-  async (
-    id: string,
-    status: string
-  ) => {
-    const response =
-      await axios.patch(
-        `${API}/${id}/status`,
-        {
-          status,
-        },
-        {
-          withCredentials: true,
-        }
-      );
+export const changeNoticeStatus = async (
+  id: string,
+  status: string
+) => {
+  const response = await api.patch(
+    `${API}/${id}/status`,
+    {
+      status,
+    }
+  );
 
-    return response.data;
-  };
+  return response.data;
+};
 
 // =======================================
 // Get Notice Statistics
 // =======================================
 
-export const getNoticeStats =
-  async () => {
-    const response =
-      await axios.get(
-        `${API}/stats`,
-        {
-          withCredentials: true,
-        }
-      );
+export const getNoticeStats = async () => {
+  const response = await api.get(
+    `${API}/stats`
+  );
 
-    return response.data;
-  };
+  return response.data;
+};
 
 // =======================================
 // Get Published Notices
@@ -155,13 +109,9 @@ export const getNoticeStats =
 
 export const getPublishedNotices =
   async () => {
-    const response =
-      await axios.get(
-        `${API}/published`,
-        {
-          withCredentials: true,
-        }
-      );
+    const response = await api.get(
+      `${API}/published`
+    );
 
     return response.data;
   };
