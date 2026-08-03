@@ -6,8 +6,10 @@ const User = require("../models/User");
 // =====================================
 exports.createFee = async (req, res, next) => {
   try {
-    const {
+ const {
   student,
+
+  templateId,
 
   academicYear,
 
@@ -36,6 +38,12 @@ exports.createFee = async (req, res, next) => {
         message: "Student is required.",
       });
     }
+    if (!templateId) {
+  return res.status(400).json({
+    success: false,
+    message: "Fee template is required.",
+  });
+}
 
     const studentData = await User.findById(student);
 
@@ -100,6 +108,7 @@ const receiptNumber = `UNI-ERP-${year}-${String(
         studentData.semester,
 
     academicYear,
+    feeTemplate: templateId,
 
 tuitionFee,
 examFee,
@@ -164,15 +173,18 @@ exports.getAllFees = async (req, res, next) => {
 // =====================================
 exports.getFeeById = async (req, res, next) => {
   try {
-    const fee = await Fee.findById(req.params.id)
-      .populate(
-        "student",
-        "fullName enrollmentNumber"
-      )
-      .populate(
-        "createdBy",
-        "fullName role"
-      );
+ const fee = await Fee.findById(req.params.id)
+  .populate(
+    "student",
+    "fullName enrollmentNumber"
+  )
+  .populate(
+    "feeTemplate"
+  )
+  .populate(
+    "createdBy",
+    "fullName role"
+  );
 
     if (!fee) {
       return res.status(404).json({
@@ -246,7 +258,7 @@ exports.updateFee = async (req, res, next) => {
     }
 
  fee.academicYear = academicYear;
-
+fee.feeTemplate = req.body.feeTemplate;
 fee.tuitionFee = tuitionFee;
 fee.examFee = examFee;
 fee.libraryFee = libraryFee;

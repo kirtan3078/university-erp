@@ -42,7 +42,15 @@ const feeSchema = new mongoose.Schema(
       required: true,
       default: "2026-27",
     },
+    // ==========================
+// Fee Template
+// ==========================
 
+feeTemplate: {
+  type: mongoose.Schema.Types.ObjectId,
+  ref: "FeeTemplate",
+  required: true,
+},
     // ==========================
     // Fee Breakdown
     // ==========================
